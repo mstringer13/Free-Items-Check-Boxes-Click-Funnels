@@ -1,0 +1,55 @@
+<script>
+var promoProd1= '1225998';
+var promoProd2= '1226000';
+$(function () {
+ 
+  $('.elOrderProductOptinProductName [value='+promoProd1+']').closest('[name="purchase[product_id]"]').each(function () {
+		var id = $(this).attr('id');
+		var val = $(this).val();
+		$(this).replaceWith(
+			$('<input/>', {
+				id: id,
+				name: "purchase[product_id]",
+				type: "checkbox",
+                checked: true,
+				value: val
+        	})
+        );
+    	$(this).attr('checked="true"');
+	});
+	
+  $('.elOrderProductOptinProductName [value='+promoProd2+']').closest('[name="purchase[product_id]"]').each(function () {
+		var id = $(this).attr('id');
+		var val = $(this).val();
+		$(this).replaceWith(
+			$('<input/>', {
+				id: id,
+				name: "purchase[product_id]",
+				type: "checkbox",
+              	checked: true,
+				value: val
+        	})
+        );
+	});
+  
+  //$('#cfAR [name="purchase[product_ids][]"]').attr("checked", false);
+  //$('#cfAR input[name="purchase[product_ids][]"][value="'+id+'"]').attr("checked", checked);
+	
+    $('[name="purchase[product_id]"]').change(function () {
+	
+      var checked = $(this).is(':checked');
+	    var id = $(this).val();
+      
+    $('#cfAR input[name="purchase[product_ids][]"][value="'+id+'"]').attr("checked", checked);
+      
+    	//if (this.checked) {
+		//	$('[name="purchase[product_ids][]"][value="'+$(this).val()+'"]').attr("checked",true);
+		//} else {
+		//	$('[name="purchase[product_ids][]"][value="'+$(this).val()+'"]').attr("checked",false);
+		//}
+		if (typeof rebuildOrderSummary !== "undefined") {
+    	rebuildOrderSummary();
+		}
+	});
+});
+</script>
